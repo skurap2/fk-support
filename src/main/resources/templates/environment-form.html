@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Environment Selection</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-5">Select Environment</h1>
+<form action="#" th:action="@{/health-check}" th:object="${healthRequest}" method="post">
+    <label for="environment">Select Environment:</label>
+    <select id="environment" name="environment" th:field="*{environment}">
+        <option value="dev">Development</option>
+        <option value="asys">ASYS</option>
+        <option value="tsys">TSYS</option>
+        <option value="mst0">MST0</option>
+        <option value="perf1">Performance 1</option>
+        <option value="perf2">Performance 2</option>
+    </select>
+    <button type="submit">Submit</button>
+</form>
+</div>
+</body>
+</html>

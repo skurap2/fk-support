@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Properties</title>
+</head>
+<body>
+<h1>Properties</h1>
+<ul>
+    <li th:each="service : ${consumerServices.urls}">
+        <strong th:text="${service.key}"></strong>:
+        <ul>
+            <li th:each="environment : ${service.value}">
+                <span th:text="${environment.key}"></span>: <span th:text="${environment.value}"></span>
+            </li>
+        </ul>
+    </li>
+</ul>
+</body>
+</html>

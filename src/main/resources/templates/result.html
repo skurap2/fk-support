@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Health Check Results</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Health Check Results</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Service</th>
+            <th>Status</th>
+            <th>Message</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="entry : ${results.entrySet()}">
+            <td th:text="${entry.key}">Service Name</td>
+            <td th:text="${entry.value.status}">Status</td>
+            <td th:text="${entry.value.message}">Message</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
