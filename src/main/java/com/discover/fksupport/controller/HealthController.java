@@ -61,19 +61,24 @@ public class HealthController {
         return "healthcheck";
     }*/
 
-    @GetMapping("/healthcheck")
+    @RequestMapping("/healthcheck")
+    public String healthCheckPage() {
+        logger.info("HealthController healthCheckPage");
+        return "healthcheck";
+    }
+
+    @PostMapping("/checkHealth")
     public String getHealthChecks(@RequestBody Map<String, String> requestBody, Model model) {
+        logger.info("HealthController getHealthChecks");
         String environment = requestBody.get("environment");
+        logger.info("Selected environment: {}", environment);
         Flux<String> healthCheckResults = healthCheckService.checkHealth(environment);
         Mono<List<String>> healthCheckResultsList = healthCheckResults.collectList();
         healthCheckResultsList.subscribe(results -> model.addAttribute("results", results));
-
-        /*List<String> results = healthCheckResults.collectList().block();
-        model.addAttribute("results", results);
-        Map<String, List<String>> response = new HashMap<>();
-        response.put("results", results);
-        logger.info("Results: {}", response);*/
-        return "healthcheck";
+        logger.info("Model Attribute returned: {}", model.getAttribute("results"));
+        //List<String> results = healthCheckResults.collectList().block(); // Blocking to ensure results are ready
+        //model.addAttribute("results", results);
+        return "healthcheck :: resultFragment"; // Return a fragment of the healthcheck template
     }
 
 

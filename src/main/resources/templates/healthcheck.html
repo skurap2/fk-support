@@ -19,7 +19,11 @@
         </select>
     </div>
     <button id="checkHealth" class="btn btn-primary">Check Health</button>
-    <div id="results" class="mt-3"></div>
+    <div id="results" class="mt-3" th:fragment="resultFragment">
+        <ul>
+            <li th:each="result : ${results}" th:text="${result}"></li>
+        </ul>
+    </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -27,7 +31,15 @@
     $(document).ready(function() {
         $('#checkHealth').click(function() {
             var environment = $('#environment').val();
-            window.location.href = "/healthcheck?environment=" + environment;
+            $.ajax({
+                url: "/checkHealth",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({ environment: environment }),
+                success: function(data) {
+                    $('#results').html(data);
+                }
+            });
         });
     });
 </script>
