@@ -9,14 +9,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class HealthController {
@@ -53,13 +51,28 @@ public class HealthController {
         return Mono.just("health-response");
     }
 
-    @GetMapping("/healthcheck")
+    /*@GetMapping("/healthcheck")
     public String getHealthChecks(@RequestParam String environment, Model model) {
         Flux<String> healthCheckResults = healthCheckService.checkHealth(environment);
         Mono<List<String>> healthCheckResultsList = healthCheckResults.collectList();
         healthCheckResultsList.subscribe(results -> model.addAttribute("results", results));
+        *//*List<String> results = healthCheckResults.collectList().block();
+        model.addAttribute("results", results);*//*
+        return "healthcheck";
+    }*/
+
+    @GetMapping("/healthcheck")
+    public String getHealthChecks(@RequestBody Map<String, String> requestBody, Model model) {
+        String environment = requestBody.get("environment");
+        Flux<String> healthCheckResults = healthCheckService.checkHealth(environment);
+        Mono<List<String>> healthCheckResultsList = healthCheckResults.collectList();
+        healthCheckResultsList.subscribe(results -> model.addAttribute("results", results));
+
         /*List<String> results = healthCheckResults.collectList().block();
-        model.addAttribute("results", results);*/
+        model.addAttribute("results", results);
+        Map<String, List<String>> response = new HashMap<>();
+        response.put("results", results);
+        logger.info("Results: {}", response);*/
         return "healthcheck";
     }
 

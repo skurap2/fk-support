@@ -17,8 +17,7 @@ public class HealthCheckService {
     private final WebClient webClient = WebClient.create();
 
     public Flux<String> checkHealth(String environment) {
-        List<String> urls = serviceUrls.values().stream()
-                .map(envMap -> envMap.get(environment)).toList();
+        List<String> urls = serviceUrls.values().stream().map(envMap -> envMap.get(environment)).toList();
         return Flux.fromIterable(urls)
                 .flatMap(url -> webClient.get()
                         .uri(url)
