@@ -1,42 +1,42 @@
 service:
   urls:
     Orig:
-      dev: "https://dev.orig.service"
+      dev: "https://api.restful-api.dev/objects"
       asys: "https://asys.orig.service"
       tsys: "https://tsys.orig.service"
       mst0: "https://mst0.orig.service"
       perf1: "https://perf1.orig.service"
       perf2: "https://perf2.orig.service"
     Cust:
-      dev: "https://dev.cust.service"
+      dev: "https://api.restful-api.dev/objects"
       asys: "https://asys.cust.service"
       tsys: "https://tsys.cust.service"
       mst0: "https://mst0.cust.service"
       perf1: "https://perf1.cust.service"
       perf2: "https://perf2.cust.service"
     Verify:
-      dev: "https://dev.verify.service"
+      dev: "https://api.restful-api.dev/objects"
       asys: "https://asys.verify.service"
       tsys: "https://tsys.verify.service"
       mst0: "https://mst0.verify.service"
       perf1: "https://perf1.verify.service"
       perf2: "https://perf2.verify.service"
     RM:
-      dev: "https://dev.rm.service"
+      dev: "https://api.restful-api.dev/objects"
       asys: "https://asys.rm.service"
       tsys: "https://tsys.rm.service"
       mst0: "https://mst0.rm.service"
       perf1: "https://perf1.rm.service"
       perf2: "https://perf2.rm.service"
     Ofac:
-      dev: "https://dev.ofac.service"
+      dev: "https://api.restful-api.dev/objects"
       asys: "https://dev.ofac.service"
       tsys: "https://dev.ofac.service"
       mst0: "https://mst0.ofac.service"
       perf1: "https://perf1.ofac.service"
       perf2: "https://perf2.ofac.service"
     Document:
-      dev: "https://dev.document.service"
+      dev: "https://api.restful-api.dev/objects"
       asys: "https://asys.document.service"
       tsys: "https://tsys.document.service"
       mst0: "https://mst0.document.service"

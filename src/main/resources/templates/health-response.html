@@ -8,8 +8,10 @@
 <body>
 <div class="container">
     <h1 class="mt-5">Health Response</h1>
-<p th:text="'Environment: ' + ${healthResponse.environment}"></p>
-<!-- Add health status for each service here -->
+    <!-- Add health status for each service here -->
+    <ul>
+        <li th:each="result : ${results}" th:text="${result}"></li>
+    </ul>
 </div>
 </body>
 </html>
