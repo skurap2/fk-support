@@ -1,8 +1,9 @@
 package com.discover.fksupport.model;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter @Setter
 public class HealthRequestModel {
     private String environment;
 }

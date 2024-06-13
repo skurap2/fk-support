@@ -1,8 +1,6 @@
 package com.discover.fksupport.controller;
 
-import com.discover.fksupport.model.ConsumerServiceModel;
-import com.discover.fksupport.model.HealthRequestModel;
-import com.discover.fksupport.model.HealthResponseModel;
+import com.discover.fksupport.model.*;
 import com.discover.fksupport.service.HealthCheckService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,10 +63,17 @@ public class HealthController {
         return "healthcheck";
     }*/
 
-    @RequestMapping("/healthcheck")
+    /*@RequestMapping("/healthcheck")
     public String healthCheckPage() {
         logger.info("HealthController healthCheckPage");
-        return "healthcheck";
+        //return "healthcheck";
+        return "environmentSelection";
+    }*/
+
+    @GetMapping("/healthcheck")
+    public String showEnvironmentSelectionPage(Model model) {
+        model.addAttribute("healthRequestModel", new HealthRequestModel());
+        return "environmentSelection";
     }
 
     /*@PostMapping("/checkHealth")
@@ -105,24 +110,29 @@ public class HealthController {
         });
     }*/
 
-    @PostMapping("/checkHealth")
+    /*@PostMapping("/checkHealth")
     public Mono<String> getHealthChecks(@RequestBody Map<String, String> requestBody, Model model) {
         String environment = requestBody.get("environment");
         logger.info("Received environment: {}", environment);
-        Flux<String> healthCheckResults = healthCheckService.checkHealth(environment);
+        Flux<HealthCheckOutputVO> healthCheckResults = healthCheckService.checkHealth(environment);
         logger.info("Health check results: {}", healthCheckResults);
         // Subscribe to the Flux stream and log each element as it arrives
-        healthCheckResults.doOnNext(result -> {
-            // Log each result to the console
-            logger.info("Health check result: {}", result);
-        }).subscribe();
+        healthCheckResults.doOnNext(result -> logger.info("Health check result: {}", result) ).subscribe();
         // Collect the results into a list and pass them to the Thymeleaf template
         return healthCheckResults.collectList().map(results -> {
             model.addAttribute("results", results);
             return "healthcheck :: resultFragment";
         });
-    }
+    }*/
 
+    @PostMapping("/checkHealth")
+    public Mono<String> getHealthChecks(@ModelAttribute HealthRequestModel healthRequestModel, Model model) {
+        String environment = healthRequestModel.getEnvironment();
+        Flux<HealthCheckOutputVO> healthCheckResults = healthCheckService.checkHealth(environment);
+        return healthCheckResults.collectList()
+                .doOnNext(results -> model.addAttribute("results", results))
+                .thenReturn("healthcheck1");
+    }
 
 }
 

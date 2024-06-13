@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Health Check Results</title>
+</head>
+<body>
+<h1>Health Check Results</h1>
+<ul>
+    <li th:each="result : ${results}">
+        <h2 th:text="'ID: ' + ${result.id}"></h2>
+        <h3 th:text="'Name: ' + ${result.name}"></h3>
+        <ul>
+            <li th:each="dataItem : ${result['data']}">
+                <span th:text="'Color: ' + ${dataItem['color']}"></span><br>
+                <span th:text="'Capacity: ' + ${dataItem['capacity']}"></span>
+            </li>
+        </ul>
+    </li>
+</ul>
+<!--<table>
+    <thead>
+    <tr>
+        <th>System Name</th>
+        <th>Status Code</th>
+        <th>Status Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    &lt;!&ndash;<tr th:each="result : ${results}">
+        <td th:text="${result.systemName}"></td>
+        <td th:text="${result.statusCode}"></td>
+        <td th:text="${result.statusDescription}"></td>
+    </tr>&ndash;&gt;
+    </tbody>
+</table>-->
+</body>
+</html>

@@ -20,8 +20,29 @@
     </div>
     <button id="checkHealth" class="btn btn-primary">Check Health</button>
     <div id="results" class="mt-3" th:fragment="resultFragment">
+        <!--<ul>
+            <li th:each="result : ${results}">
+                <h2 th:text="'ID: ' + ${result.id}"></h2>
+                <h3 th:text="'Name: ' + ${result.name}"></h3>
+                <ul>
+                    <li th:each="dataItem : ${result.data}">
+                        <span th:text="'Color: ' + ${dataItem.color}"></span><br>
+                        <span th:text="'Capacity: ' + ${dataItem.capacity}"></span>
+                    </li>
+                </ul>
+            </li>
+        </ul>-->
         <ul>
-            <li th:each="result : ${results}" th:text="${result}"></li>
+            <li th:each="result : ${results}">
+                <h2 th:text="'ID: ' + ${result['id']}"></h2>
+                <h3 th:text="'Name: ' + ${result['name']}"></h3>
+                <ul>
+                    <li th:each="dataItem : ${result['data']}">
+                        <span th:text="'Color: ' + ${dataItem['color']}"></span><br>
+                        <span th:text="'Capacity: ' + ${dataItem['capacity']}"></span>
+                    </li>
+                </ul>
+            </li>
         </ul>
     </div>
 
